@@ -1,0 +1,89 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<persistence xmlns="http://xmlns.jcp.org/xml/ns/persistence"
+             xmlns:xsi="http://www.w3.org/2001/XMLSchema-instance"
+             xsi:schemaLocation="http://xmlns.jcp.org/xml/ns/persistence
+             http://xmlns.jcp.org/xml/ns/persistence/persistence_2_1.xsd"
+             version="2.1">
+
+
+    <persistence-unit name="watcherManager" >
+        <class>com.khoana.shopwatcher.model.Account</class>
+        <exclude-unlisted-classes>false</exclude-unlisted-classes>
+        
+        <!-- Provider JPA (EclipseLink hoặc Hibernate) -->
+        <provider>org.hibernate.jpa.HibernatePersistenceProvider</provider>
+
+
+        <!-- Thông tin Database -->
+        <properties>    
+            <!-- Kết nối SQL Server -->
+            <!-- 
+            ============================================================
+            CẤU HÌNH SQL SERVER AUTHENTICATION (Hiện tại đang dùng)
+            ============================================================
+            Nếu gặp lỗi "Login failed for user 'sa'", làm theo các bước sau:
+            
+            BƯỚC 1: Mở SQL Server Management Studio (SSMS)
+            BƯỚC 2: Kết nối bằng Windows Authentication
+            
+            BƯỚC 3: Bật SQL Server Authentication
+            - Right-click server name → Properties
+            - Tab "Security"
+            - Chọn "SQL Server and Windows Authentication mode"
+            - Click OK
+            
+            BƯỚC 4: Restart SQL Server
+            - Mở Services (Windows + R → services.msc)
+            - Tìm "SQL Server (MSSQLSERVER)" hoặc tên instance của bạn
+            - Right-click → Restart
+            
+            BƯỚC 5: Kích hoạt và đặt mật khẩu cho tài khoản 'sa'
+            - Trong SSMS: Security → Logins → Right-click 'sa' → Properties
+            - Tab "General": Đặt mật khẩu (ví dụ: "123")
+            - Tab "Status": 
+              * Login: Enabled
+              * SQL Server Authentication: Enabled
+            - Click OK
+            
+            BƯỚC 6: Tạo database (nếu chưa có)
+            - Right-click "Databases" → New Database
+            - Tên: "WatcherDB"
+            - Click OK
+            
+            BƯỚC 7: Cấp quyền cho 'sa' trên database WatcherDB
+            - Security → Logins → 'sa' → Properties
+            - Tab "User Mapping"
+            - Chọn "WatcherDB"
+            - Chọn role "db_owner"
+            - Click OK
+            
+            BƯỚC 8: Kiểm tra lại
+            - Thử kết nối bằng SSMS với:
+              * Server: localhost
+              * Authentication: SQL Server Authentication
+              * Login: sa
+              * Password: 123
+            
+            ============================================================
+            ALTERNATIVE: WINDOWS AUTHENTICATION (Nếu muốn dùng)
+            ============================================================
+            Nếu muốn dùng Windows Authentication thay vì 'sa':
+            1. Comment/xóa 2 dòng user và password bên dưới
+            2. Thay đổi URL thành:
+               jdbc:sqlserver://localhost:1433;databaseName=WatcherDB;integratedSecurity=true;encrypt=true;trustServerCertificate=true
+            3. Đảm bảo Windows user của bạn có quyền truy cập SQL Server
+            ============================================================
+            -->
+            <property name="jakarta.persistence.jdbc.driver" value="com.microsoft.sqlserver.jdbc.SQLServerDriver"/>
+            <property name="jakarta.persistence.jdbc.url" value="jdbc:sqlserver://localhost:1433;databaseName=WatcherDB;encrypt=true;trustServerCertificate=true"/>
+            <property name="jakarta.persistence.jdbc.user" value="sa"/>
+            <property name="jakarta.persistence.jdbc.password" value="Hh121213"/>
+
+            <!-- Hibernate Config -->
+            <property name="hibernate.dialect" value="org.hibernate.dialect.SQLServerDialect"/>
+            <property name="hibernate.hbm2ddl.auto" value="update"/> 
+            <property name="hibernate.show_sql" value="true"/>
+            <property name="hibernate.format_sql" value="true"/>
+        </properties>
+    </persistence-unit>
+</persistence>
