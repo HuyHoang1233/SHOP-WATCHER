@@ -99,9 +99,7 @@ public class AccountDAO {
         }
     }
 
-    // ==========================================================
-    // HÀM MAIN ĐỂ TEST KẾT NỐI (Chạy file này bằng Shift + F6)
-    // ==========================================================
+
     public static void main(String[] args) {
         System.out.println("--- LOADING CONNECT DATABASE ---");
         try {
